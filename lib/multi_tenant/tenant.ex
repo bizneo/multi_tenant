@@ -55,6 +55,8 @@ defmodule MultiTenant.Tenant do
   def create_tenant(tenant), do: create_tenant(@repo, tenant)
   def create_tenant(repo, tenant), do: repo.query("CREATE SCHEMA \"#{tenant}\"", [])
 
-  def drop_tenant(tenant), do: drop_tenant(@repo, tenant)
-  def drop_tenant(rep, tenant), do: rep.query!("DROP SCHEMA IF EXISTS \"#{tenant}\" CASCADE", [])
+  def delete_tenant(tenant), do: delete_tenant(@repo, tenant)
+
+  def delete_tenant(rep, tenant),
+    do: rep.query!("DROP SCHEMA IF EXISTS \"#{tenant}\" CASCADE", [])
 end
